@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service'; 
 import { ConfigModule } from '@nestjs/config';
+import { DatabaseModule } from './Db/init';
+import { AuthModule } from './modules/user/auth.module';
 
 @Module({
   imports: [
@@ -9,7 +11,7 @@ import { ConfigModule } from '@nestjs/config';
       isGlobal: true,
       envFilePath: '.env',
       cache: true
-    })
+    }),DatabaseModule,AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],

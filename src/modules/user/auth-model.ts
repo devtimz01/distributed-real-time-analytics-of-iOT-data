@@ -4,7 +4,7 @@ import { Model, Table,Column,DataType } from "sequelize-typescript";
     tableName:'Auth',
     timestamps: true
 })
-class AuthModel extends Model{
+export class AuthModel extends Model{
     @Column({
             primaryKey: true,
             type: DataType.UUID,
@@ -30,6 +30,7 @@ class AuthModel extends Model{
         email: string
     @Column({
           type: DataType.BOOLEAN,
+          defaultValue: false,
           allowNull: true
            })
         isEmailVerified: boolean
@@ -37,22 +38,32 @@ class AuthModel extends Model{
           type: DataType.ENUM('male','female'),
           allowNull: false,
            })
-        gender: string
+        gender: 'male'|'female'
     @Column({
           type: DataType.INTEGER,
           allowNull: false,
            })
         age: number
     @Column({
-          type: DataType.DATE,
-          defaultValue: DataType.NOW,
-          allowNull: false,
-           })
-        declare createdAt: string
+          type: DataType.DECIMAL(5,2),
+          allowNull: true,
+    })
+    weight:number
+    @Column({
+          type: DataType.SMALLINT,
+          allowNull: true,
+    })
+    height_cm:number
     @Column({
           type: DataType.DATE,
           defaultValue: DataType.NOW,
           allowNull: false,
            })
-        declare updatedAt: string
+        declare createdAt: Date
+    @Column({
+          type: DataType.DATE,
+          defaultValue: DataType.NOW,
+          allowNull: false,
+           })
+        declare updatedAt: Date
 };

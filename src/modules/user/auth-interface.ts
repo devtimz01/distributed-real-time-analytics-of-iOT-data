@@ -1,3 +1,4 @@
+import { Optional } from "sequelize";
 
 export interface Auth{
     id: string;
@@ -7,6 +8,10 @@ export interface Auth{
     password: string;
     gender: 'male'|'female',
     age: number,
-    createdAT: Date;
+    weight: number;
+    height_cm:number;
+    createdAt: Date;
     updatedAt: Date
-}
+};
+
+export interface Authcreationbody extends Optional<Auth,'id'|'createdAt'|'updatedAt'>{}

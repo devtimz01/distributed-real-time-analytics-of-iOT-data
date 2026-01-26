@@ -6,9 +6,13 @@ class SocketIoServer{
     @WebSocketServer()
     server:Server
     @SubscribeMessage('body-metric')
-    async getRealTimeUpdate(@MessageBody() data:{
-
+    async getRealTimeData(@MessageBody() data:{
+        userId: string
     },@ConnectedSocket() client:Socket){
-        
+        client.on('real-time-data',(data)=>{
+
+        })
+        return ''
     }
 };
+
