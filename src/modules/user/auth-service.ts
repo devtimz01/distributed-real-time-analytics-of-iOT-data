@@ -1,15 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { AuthModel } from './auth-model';
-import { Auth, Authcreationbody, } from './auth-interface';
+import { Auth } from './auth-interface';
 import * as argon2 from 'argon2'
-import { JwtModule, JwtService } from '@nestjs/jwt';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import {   JwtService } from '@nestjs/jwt';
+import {  ConfigService } from '@nestjs/config';
+import { AuthResponseDto, SignupDto } from './auth.dto';
 
 @Injectable()
 export class AuthServiceService {
  constructor(private authmodel:typeof AuthModel, private jwtService:JwtService, private configService:ConfigService){}
 
-    async signup(signupDto:Auth):Promise<Auth>{
+    async signup(signupDto:SignupDto):Promise<AuthResponseDto>{
         const record= {
             where:{username:signupDto.username}
         }
@@ -38,5 +39,4 @@ export class AuthServiceService {
         },{secret: this.configService.get<string>('jwt_secret'),expiresIn: '7d'})
         return {accessToken,refreshToken}
     }
-    
 };
