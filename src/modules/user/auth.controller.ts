@@ -1,29 +1,23 @@
-import { Body, Controller, HttpCode, InternalServerErrorException, Param, Post, UseInterceptors } from '@nestjs/common';
-import { AuthServiceService } from './auth-service';
-import { Auth, type Authcreationbody } from './auth-interface';
-import { AuthResponseDto, SignupDto } from './auth.dto';
+import { Body, ClassSerializerInterceptor, Controller, HttpCode,Post, UseGuards, UseInterceptors } from '@nestjs/common';
+import { AuthService } from './auth-service';
+import {  LoginDto, SignupDto } from './auth.dto';
+import { JwtGuard } from 'src/common/guards/jwt-auth';
 
 @Controller('auth')
 export class AuthController {
-    constructor(private authService: AuthServiceService){}
+    constructor(private authService: AuthService){}
 
 @Post('signup')
-@UseInterceptors(AuthResponseDto)
+@UseInterceptors(ClassSerializerInterceptor)
 @HttpCode(201)
     signupUser(@Body() dto:SignupDto){
-        try{
-            this.authService.signup(dto) 
-        }
-        catch(err){
-            throw new InternalServerErrorException()
-        }
+       return this.authService.signup(dto)
+      
     }
 @Post('login')
+@UseInterceptors(ClassSerializerInterceptor)
 @HttpCode(201)
-    loginUser(){
-        try{}
-        catch(err){
-            throw new InternalServerErrorException()
-        }
+    loginUser(@Body() loginDto: LoginDto){
+        return this.authService.login(loginDto)
     }
 }
