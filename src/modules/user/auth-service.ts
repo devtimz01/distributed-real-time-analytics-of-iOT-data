@@ -23,6 +23,7 @@ export class AuthService {
         if(!hashedPassword){
             throw new InternalServerErrorException('password not hashed')}
         const newUser = await this.authmodel.create({...signupDto,password:hashedPassword,})
+        Logger.info('new user created!')
         return plainToInstance(SignupResponseDto, newUser.get({ plain: true }))
     };
     async login(loginDto:LoginDto):Promise<LoginResponseDto>{

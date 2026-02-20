@@ -1,4 +1,5 @@
-import { Model, Table, Column, DataType } from "sequelize-typescript";
+import { Model, Table, Column, DataType, HasMany } from "sequelize-typescript";
+import { StepsModel } from "../steps/steps.model";
 
 @Table({
   tableName: 'Auth',
@@ -75,4 +76,7 @@ export class AuthModel extends Model {
     allowNull: false,
   })
   declare updatedAt: Date;
+
+  @HasMany(()=>StepsModel,{foreignKey:'userId'})
+  stepsWorkout: StepsModel[]
 }

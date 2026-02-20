@@ -12,12 +12,12 @@ export class AuthController {
 @HttpCode(201)
     signupUser(@Body() dto:SignupDto){
        return this.authService.signup(dto)
-      
     }
+
 @Post('login')
 @UseInterceptors(ClassSerializerInterceptor)
 @HttpCode(201)
     loginUser(@Body() loginDto: LoginDto){
         return this.authService.login(loginDto)
     }
-}
+};

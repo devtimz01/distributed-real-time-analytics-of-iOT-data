@@ -5,6 +5,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth-service';
+import { StepsModel } from '../steps/steps.model';
+import { StepsModule } from '../steps/steps.module';
 
 @Module({
    imports:[SequelizeModule.forFeature([AuthModel]),
@@ -14,7 +16,7 @@ import { AuthService } from './auth-service';
          signOptions:{expiresIn:'1h'}
       }),
       inject:[ConfigService]
-   })
+   }),StepsModule
 ],
   controllers:[AuthController],
    providers:[AuthService],

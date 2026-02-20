@@ -1,5 +1,5 @@
 import { io } from "socket.io-client";
-import { IbodyMetrics } from "../Body-metrics/interface-body-metrics";
+import { IbodyMetrics } from "../steps/steps.interface";
 
 const socket = io('http://localhost:3000')
 socket.on('connect',()=>{
