@@ -19,27 +19,27 @@ export class StepsModel extends Model{
         defaultValue: 0,
         allowNull: false
      })
-    declare count:number
+    declare steps:number
 
      @Column({
         type:DataType.DECIMAL(5,2),
         allowNull: false})
-    declare km_covered: number
+    declare kmCovered: number
 
      @Column({
         type:DataType.DATE,
         allowNull: true})
-     declare start_timestamp:Date
+     declare startTimestamp:Date
 
       @Column({
         type:DataType.DECIMAL(5,2),
         allowNull: false})
-      declare current_pace: number
+      declare pace: number
 
       @Column({
         type:DataType.DATE,
         allowNull: true})
-     declare end_timestamp:Date
+     declare endTimestamp:Date
 
       @Column({
         type: DataType.DATE,
