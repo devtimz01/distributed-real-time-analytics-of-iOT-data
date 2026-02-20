@@ -1,11 +1,11 @@
 import { Module } from "@nestjs/common";
-import { StepsModel } from "./steps.model";
 import { SequelizeModule } from "@nestjs/sequelize";
+import { GoalsModel } from "./goals";
 
 
 @Module({
-    imports:[SequelizeModule.forFeature([StepsModel])],
+    imports:[SequelizeModule.forFeature([GoalsModel])],
     providers:[],
     exports:[SequelizeModule]
 })
-export class StepsModule{}
+export class GoalsModule{}

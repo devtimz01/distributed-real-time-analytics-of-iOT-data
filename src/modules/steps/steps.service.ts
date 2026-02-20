@@ -2,9 +2,9 @@ import { Injectable } from "@nestjs/common";
 
 @Injectable()
 class BodyMetricService{
-    async stepsAnalytics(){
+    async startStepsWorkout(){
         try{
-            
+
         }
         catch(err){}
     }

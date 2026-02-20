@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { AuthModel } from './auth-model';
 import { JwtModule } from '@nestjs/jwt';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import {  ConfigService } from '@nestjs/config';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth-service';
-import { StepsModel } from '../steps/steps.model';
+import { GoalsModule } from '../goals/goals.module';
 import { StepsModule } from '../steps/steps.module';
 
 @Module({
@@ -16,9 +16,9 @@ import { StepsModule } from '../steps/steps.module';
          signOptions:{expiresIn:'1h'}
       }),
       inject:[ConfigService]
-   }),StepsModule
+   }), GoalsModule,StepsModule
 ],
-  controllers:[AuthController],
+   controllers:[AuthController],
    providers:[AuthService],
    exports:[SequelizeModule]
 })

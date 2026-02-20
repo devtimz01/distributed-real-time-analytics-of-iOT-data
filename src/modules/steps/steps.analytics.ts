@@ -1,16 +1,17 @@
 import {Table,Model, Column, DataType} from 'sequelize-typescript'
 
 @Table({
-    tableName: 'steps',
+    tableName: 'steps-analytics',
     timestamps:true
 })
-export class StepsModel extends Model{
+export class StepsAnalyticsModel extends Model{
      @Column({
         primaryKey: true,
         type: DataType.UUID,
         defaultValue: DataType.UUIDV4
      })
      declare id:string
+
      @Column({ type: DataType.UUID })
      declare userId: string;
 
@@ -19,35 +20,20 @@ export class StepsModel extends Model{
         defaultValue: 0,
         allowNull: false
      })
-    declare count:number
+    totalSteps:number
 
-     @Column({
+    @Column({
         type:DataType.DECIMAL(5,2),
         allowNull: false})
-    declare km_covered: number
+    totalKmCovered: number
 
-     @Column({
-        type:DataType.DATE,
-        allowNull: true})
-     declare start_timestamp:Date
-
-      @Column({
-        type:DataType.DECIMAL(5,2),
-        allowNull: false})
-      declare current_pace: number
-
-      @Column({
-        type:DataType.DATE,
-        allowNull: true})
-     declare end_timestamp:Date
-
-      @Column({
+    @Column({
         type: DataType.DATE,
         defaultValue: DataType.NOW
       })
       declare createdAt: Date
 
-      @Column({
+    @Column({
         type: DataType.DATE,
         defaultValue: DataType.NOW
       })
