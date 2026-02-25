@@ -45,3 +45,16 @@ export class StepsResponseDto{
     @Expose()
     endTimestamp:number
 }
+
+export class StepsAnalyticsResponseDto{
+    @Expose()
+    id:string
+    @Expose()
+    totalSteps:number
+    @Expose()
+    totalKmCovered:number
+    @Expose()
+    createdAt:Date
+    @Expose()
+    updatedAt:Date
+}

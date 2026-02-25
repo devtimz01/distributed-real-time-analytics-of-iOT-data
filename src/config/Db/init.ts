@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import {  ConfigService } from '@nestjs/config';
 import { Dialect } from 'sequelize';
 
 @Module({
