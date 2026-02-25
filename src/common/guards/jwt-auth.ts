@@ -29,7 +29,6 @@ export class JwtGuard implements CanActivate{
            return true;
     }
         catch(error){
-             Logger.error(error)
             throw new UnauthorizedException("invalid or expired token")
         }
     }

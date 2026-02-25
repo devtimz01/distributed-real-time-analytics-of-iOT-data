@@ -28,11 +28,14 @@ async createStepsWorkoutSession(stepsDto:StepsDto,user:string):Promise<StepsResp
     };
 
 async stepsAnalytics(){
-    try{
-        
-        }
-    catch(err){
-
-        }
-    };
+   try{
+      const analytics={
+          
+      }
+    }
+   catch(err){
+        this.logger.error(err)
+        throw new InternalServerErrorException('failed to create request')
+    }
+};
 };

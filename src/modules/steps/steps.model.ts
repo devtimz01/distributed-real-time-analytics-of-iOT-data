@@ -11,7 +11,7 @@ export class StepsModel extends Model{
         defaultValue: DataType.UUIDV4
      })
      declare id:string
-     @Column({ type: DataType.UUID })
+     @Column({ type: DataType.UUID, allowNull:false })
      declare userId: string;
 
      @Column({

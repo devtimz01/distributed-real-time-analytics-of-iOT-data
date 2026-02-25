@@ -1,4 +1,4 @@
-import {Table,Model, Column, DataType} from 'sequelize-typescript'
+import {Table,Model, Column, DataType, AllowNull} from 'sequelize-typescript'
 
 @Table({
     tableName: 'steps-analytics',
@@ -12,7 +12,7 @@ export class StepsAnalyticsModel extends Model{
      })
      declare id:string
 
-     @Column({ type: DataType.UUID })
+     @Column({ type: DataType.UUID, allowNull: false })
      declare userId: string;
 
      @Column({
