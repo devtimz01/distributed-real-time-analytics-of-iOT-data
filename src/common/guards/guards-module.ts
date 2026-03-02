@@ -4,7 +4,7 @@ import { AuthModule } from "src/modules/user/auth.module";
 import { JwtGuard } from "./jwt-auth";
 
 @Module({
-    imports:[AuthModule],
+    imports:[AuthModule,ConfigModule],
     providers:[JwtGuard],
     exports:[JwtGuard]
 })

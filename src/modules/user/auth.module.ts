@@ -16,7 +16,7 @@ import { StepsModule } from '../steps/steps.module';
          signOptions:{expiresIn:'1h'}
       }),
       inject:[ConfigService]
-   }), GoalsModule,StepsModule
+   })
 ],
    controllers:[AuthController],
    providers:[AuthService],

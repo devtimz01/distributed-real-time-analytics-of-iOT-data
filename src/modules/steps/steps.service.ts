@@ -1,4 +1,4 @@
-import { Inject, Injectable, InternalServerErrorException } from "@nestjs/common";
+import { Inject, Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { StepsModel } from "./steps.model";
 import { StepsAnalyticsModel } from "./steps.analytics";
@@ -6,10 +6,12 @@ import { StepsAnalyticsResponseDto, StepsDto, StepsResponseDto } from "./steps.d
 import { plainToInstance } from "class-transformer";
 import { LoggerInstance } from "src/utils/log";
 import { Sequelize } from "sequelize-typescript";
+import { WebSocketGateway } from "@nestjs/websockets";
+import { WebsocketGateway } from "../Web-socket/web-socket";
 
 @Injectable()
 export class StepService{
-constructor(@Inject('LOGGER')private logger:typeof LoggerInstance, @InjectModel(StepsModel) private stepsModel: typeof StepsModel,
+constructor(@Inject('LOGGER')private logger:typeof LoggerInstance,private socketio: WebsocketGateway,  @InjectModel(StepsModel) private stepsModel: typeof StepsModel,
     @InjectModel(StepsAnalyticsModel) private stepsAnalyticsModel: typeof StepsModel, private sequelize: Sequelize){}
 
 async createStepsWorkoutSession(stepsDto:StepsDto,user:string):Promise<StepsResponseDto>{
@@ -48,11 +50,19 @@ async stepsAnalytics(req:string,stepsDto:StepsDto):Promise<StepsAnalyticsRespons
         if(!analytics){
             throw new InternalServerErrorException('cannot get analytics record')
         }
+      const socketId = this.socketio.getSocketId(req)
+      if(!socketId){
+        throw new NotFoundException('cannot get users socket.id')
+      }
+      this.socketio.server.to(socketId).emit('dashboard',{
+        message:analytics,
+        from: req
+      })
      return plainToInstance(StepsAnalyticsResponseDto, analytics.get({plain:true}))
     }
    catch(err){
         this.logger.error(err)
         throw new InternalServerErrorException('failed to create request')
     }
-};
+  };
 };

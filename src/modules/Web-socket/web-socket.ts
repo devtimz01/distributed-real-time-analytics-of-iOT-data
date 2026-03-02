@@ -1,18 +1,39 @@
-/**import { ConnectedSocket, MessageBody, SubscribeMessage, WebSocketGateway, WebSocketServer } from "@nestjs/websockets";
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { WebSocketGateway, WebSocketServer } from "@nestjs/websockets";
 import { Server, Socket } from "socket.io";
 
+@Injectable()
 @WebSocketGateway({cors:true})
-class SocketIoServer{
-    @WebSocketServer()
-    server:Server
-    @SubscribeMessage('body-metric')
-    async getRealTimeData(@MessageBody() data:{
-        userId: string
-    },@ConnectedSocket() client:Socket){
-        client.on('real-time-data',(data)=>{
+export class WebsocketGateway{
+@WebSocketServer()
+server:Server
+constructor(){}
+public socketUsers = new Map<String,String>()
 
-        })
-        return ''
+async handleConnection(client:Socket){
+const connectedusersId= client.handshake.auth.userId
+if(connectedusersId){
+    this.socketUsers.set(connectedusersId,client.id)}
+}
+
+handleDisconnect(client:Socket){
+   const socketId= this.findUsersBysocketId(client.id)
+   if(socketId){
+   this.socketUsers.delete(socketId) }
+};
+findUsersBysocketId(id:string):string|undefined{
+    for(const [auth,socketId] of this.socketUsers.entries()){
+        if(id===socketId){
+            return id
+        }
     }
-};**/
-
+    return undefined;
+}
+getSocketId(id:string): string| undefined{
+   const socketId=  this.socketUsers.get(id) as string
+   if(!socketId){
+    throw new NotFoundException('cannot get users socket.id')
+   }
+   return socketId
+};
+};

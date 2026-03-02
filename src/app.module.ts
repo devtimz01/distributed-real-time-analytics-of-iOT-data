@@ -6,6 +6,7 @@ import { DatabaseModule } from './config/Db/init';
 import { AuthModule } from './modules/user/auth.module';
 import { GuardModule } from './common/guards/guards-module';
 import { LogModule } from './utils/logs.module';
+import { StepsModule } from './modules/steps/steps.module';
 
 @Module({
   imports: [
@@ -13,7 +14,7 @@ import { LogModule } from './utils/logs.module';
       isGlobal: true,
       envFilePath: '.env',
       cache: true
-    }),DatabaseModule,AuthModule,GuardModule,LogModule
+    }),DatabaseModule,AuthModule,GuardModule,LogModule,StepsModule
   ],
   controllers: [AppController],
   providers: [AppService],
