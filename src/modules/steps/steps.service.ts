@@ -6,7 +6,6 @@ import { StepsAnalyticsResponseDto, StepsDto, StepsResponseDto } from "./steps.d
 import { plainToInstance } from "class-transformer";
 import { LoggerInstance } from "src/utils/log";
 import { Sequelize } from "sequelize-typescript";
-import { WebSocketGateway } from "@nestjs/websockets";
 import { WebsocketGateway } from "../Web-socket/web-socket";
 
 @Injectable()
